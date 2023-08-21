@@ -57,7 +57,12 @@ const sampleDataForPhotoList = [
 ];
 
 const PhotoList = (props) => {
-  const photoList = sampleDataForPhotoList.map((photo) => {
+  // Convert props object into an array
+  const propsArray = Object.keys(props).map((property) => {
+    return props[property];
+  })
+
+  const photoList = propsArray.map((photo) => {
     return (
       <li key={photo.id}>
         <PhotoListItem 
