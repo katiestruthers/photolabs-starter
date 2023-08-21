@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import PhotoList from './components/PhotoList';
-import TopicList from 'components/TopicList';
+import TopNavigationBar from 'components/TopNavigationBar';
 
 const sampleDataForPhotoListItem = {
   id: "1",
@@ -18,7 +18,7 @@ const sampleDataForPhotoListItem = {
 const App = () => {
   return (
     <div className="App">
-      <TopicList />
+      <TopNavigationBar />
       <PhotoList
         id={sampleDataForPhotoListItem.id}
         city={sampleDataForPhotoListItem.location.city}
