@@ -1,5 +1,5 @@
 import React from 'react';
-import PhotoListItem from './components/PhotoListItem';
+import PhotoList from './components/PhotoList';
 import './App.scss';
 
 const sampleDataForPhotoListItem = {
@@ -17,8 +17,8 @@ const sampleDataForPhotoListItem = {
 const App = () => {
   return (
     <div className="App">
-      <PhotoListItem 
-        key={sampleDataForPhotoListItem.id}
+      <PhotoList
+        id={sampleDataForPhotoListItem.id}
         city={sampleDataForPhotoListItem.location.city}
         country={sampleDataForPhotoListItem.location.country}
         imageSource={sampleDataForPhotoListItem.imageSource}
