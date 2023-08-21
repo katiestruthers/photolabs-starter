@@ -57,11 +57,9 @@ const sampleDataForPhotoList = [
 ];
 
 const PhotoList = (props) => {
-  let photoList = [];
-
-  for (let i = 0; i < 3; i++) {
-    photoList.push((
-      <li key={i}>
+  const photoList = Array.from(Array(3)).map((_, index) => {
+    return (
+      <li key={index}>
         <PhotoListItem 
           id={props.id}
           city={props.city}
@@ -71,8 +69,8 @@ const PhotoList = (props) => {
           profile={props.profile}
         />
       </li>
-    ));
-  }
+    )
+  })
 
   return (
     <ul className="photo-list">
