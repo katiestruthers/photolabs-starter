@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/TopicList.scss";
 import TopicListItem from "./TopicListItem";
+import FavBadge from './FavBadge';
 
 const sampleDataForTopicList = [
   {
@@ -35,6 +36,7 @@ const TopicList = () => {
   return (
     <div className="top-nav-bar__topic-list">
       {topicList}
+      <FavBadge />
     </div>
   );
 };
