@@ -12,7 +12,7 @@ const PhotoList = (props) => {
     return (
       <li key={photo.id}>
         <PhotoListItem 
-          id={photo.id}
+          key={photo.id}
           city={photo.location.city}
           country={photo.location.country}
           imageSource={photo.urls.regular}
