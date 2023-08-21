@@ -57,16 +57,16 @@ const sampleDataForPhotoList = [
 ];
 
 const PhotoList = (props) => {
-  const photoList = Array.from(Array(3)).map((_, index) => {
+  const photoList = sampleDataForPhotoList.map((photo) => {
     return (
-      <li key={index}>
+      <li key={photo.id}>
         <PhotoListItem 
-          id={props.id}
-          city={props.city}
-          country={props.country}
-          imageSource={props.imageSource}
-          username={props.username}
-          profile={props.profile}
+          id={photo.id}
+          city={photo.location.city}
+          country={photo.location.country}
+          imageSource={photo.urls.regular}
+          username={photo.user.name}
+          profile={photo.user.profile}
         />
       </li>
     )
