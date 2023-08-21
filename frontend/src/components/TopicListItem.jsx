@@ -1,5 +1,4 @@
 import React from "react";
-
 import "../styles/TopicListItem.scss";
 
 const sampleDataForTopicListItem = {
@@ -8,10 +7,10 @@ const sampleDataForTopicListItem = {
   label: "Nature",
 };
 
-const TopicListItem = () => {
+const TopicListItem = (props) => {
   return (
     <div className="topic-list__item">
-      {/* Insert React */}
+      <p>{props.title}</p>
     </div>
   );
 };
