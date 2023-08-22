@@ -18,7 +18,8 @@ const App = () => {
 
   return (
     <div className="App">
-      {click ? <PhotoDetailsModal /> : <HomeRoute {...homeData}/>}
+      <HomeRoute {...homeData}/>
+      {click && <PhotoDetailsModal clickHandling={clickHandling}/>}
     </div>
   );
 };
