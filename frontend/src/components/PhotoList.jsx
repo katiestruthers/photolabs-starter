@@ -14,6 +14,7 @@ const PhotoList = (props) => {
         <PhotoListItem
           key={photo.id} 
           photo={photo}
+          clickHandling={props.clickHandling}
         />
       </li>
     )

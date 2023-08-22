@@ -4,7 +4,7 @@ import PhotoList from '../components/PhotoList';
 import TopNavigationBar from '../components/TopNavigationBar';
 
 const HomeRoute = (props) => {
-  const photoData = {photos: {...props.photos}};
+  const photoData = {photos: {...props.photos}, clickHandling: props.clickHandling};
   const navData = {topics: {...props.topics}};
 
   // Notification tracker
