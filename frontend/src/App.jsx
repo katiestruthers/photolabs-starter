@@ -8,7 +8,11 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 const App = () => {
   // Photo details modal state
   const [click, setClick] = useState(false);
-  const clickHandling = () => setClick(!click);
+  const [photo, setPhoto] = useState(null);
+  const clickHandling = (current) => {
+    setPhoto(current);
+    return setClick(!click);
+  }
 
   const homeData = {
     photos: { ...photos },
@@ -19,7 +23,7 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute {...homeData}/>
-      {click && <PhotoDetailsModal clickHandling={clickHandling}/>}
+      {click && <PhotoDetailsModal clickHandling={clickHandling} photo={photo}/>}
     </div>
   );
 };
