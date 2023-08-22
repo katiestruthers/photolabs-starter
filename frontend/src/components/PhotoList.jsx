@@ -4,8 +4,8 @@ import PhotoListItem from "./PhotoListItem";
 
 const PhotoList = (props) => {
   // Convert props.photos object into an array
-  const propsArray = Object.keys(props).map((property) => {
-    return props[property];
+  const propsArray = Object.keys(props.photos).map((property) => {
+    return props.photos[property];
   })
 
   const photoList = propsArray.map((photo) => {
