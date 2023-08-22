@@ -2,13 +2,10 @@ import React from "react";
 import "../styles/TopicList.scss";
 import TopicListItem from "./TopicListItem";
 import FavBadge from './FavBadge';
+import objectToArray from "helpers/objectToArray";
 
 const TopicList = (props) => {
-  // Convert props.topics object into an array
-  const propsArray = Object.keys(props.topics).map((property) => {
-    return props.topics[property];
-  })
-
+  const propsArray = objectToArray(props.topics);
   const topicList = propsArray.map((topic) => {
     return (
       <span key={topic.id}>

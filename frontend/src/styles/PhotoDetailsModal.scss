@@ -18,20 +18,27 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 8px;
   cursor: pointer;
   margin-left: 16px;
-  margin-top: 16px;
+  margin-top: 10px;
 }
 
 .photo-details-modal__images {
-  margin-left: 36px;
-  margin-top: 8px;
+  margin-left: 20px;
+  margin-top: 6px;
 }
 
 .photo-details-modal__image {
   max-width: 95%;
   border-radius: 8px;
+}
+
+.photo-details-modal__similar-image {
+  width: 100px;
+  height: 75px;
+  padding: 5px;
+  object-fit: cover;
 }
 
 .photo-details-modal__top-bar {
@@ -49,7 +56,7 @@
 }
 
 .photo-details-modal__header {
-  font-size: 18px;
+  font-size: 10px;
   font-weight: 500;
   color: #1e1e1e;
   margin-top: 24px;

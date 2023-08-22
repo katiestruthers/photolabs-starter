@@ -1,20 +1,17 @@
 import React from "react";
 import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
+import objectToArray from "helpers/objectToArray";
 
 const PhotoList = (props) => {
-  // Convert props.photos object into an array
-  const propsArray = Object.keys(props.photos).map((property) => {
-    return props.photos[property];
-  })
-
+  const propsArray = objectToArray(props.photos);
   const photoList = propsArray.map((photo) => {
     return (
       <li key={photo.id}>
         <PhotoListItem
           key={photo.id} 
           photo={photo}
-          clickHandling={props.clickHandling}
+          photoHandling={props.photoHandling}
         />
       </li>
     )
