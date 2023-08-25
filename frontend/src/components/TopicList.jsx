@@ -1,8 +1,8 @@
-import React from "react";
-import "../styles/TopicList.scss";
-import TopicListItem from "./TopicListItem";
+import React from 'react';
+import '../styles/TopicList.scss';
+import TopicListItem from './TopicListItem';
 import FavBadge from './FavBadge';
-import objectToArray from "helpers/objectToArray";
+import objectToArray from 'helpers/objectToArray';
 
 const TopicList = (props) => {
   const propsArray = objectToArray(props.topics);

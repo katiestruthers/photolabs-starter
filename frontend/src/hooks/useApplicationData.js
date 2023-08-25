@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import photos from '../mocks/photos';
-import objectToArray from "helpers/objectToArray";
 
 const useApplicationData = () => {
     // Photo details modal state

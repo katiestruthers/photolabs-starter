@@ -1,7 +1,7 @@
-import React from "react";
-import "../styles/PhotoList.scss";
-import PhotoListItem from "./PhotoListItem";
-import objectToArray from "helpers/objectToArray";
+import React from 'react';
+import '../styles/PhotoList.scss';
+import PhotoListItem from './PhotoListItem';
+import objectToArray from 'helpers/objectToArray';
 
 const PhotoList = (props) => {
   const propsArray = objectToArray(props.photos);
