@@ -24,6 +24,7 @@ const App = () => {
       notifHandler(id, !like);
       setLike(!like);
     }
+    likes[key] = like;
 
   // Set like useState to associated photo
   photos[key].likedByKey = { like, likeHandler };
@@ -42,10 +43,7 @@ const App = () => {
 
   const [favPhoto, setFavPhoto] = useState(false);
   const notifHandler = (id, like) => {
-    console.log(like);
     likes[id] = like;
-    console.log(likes);
-    console.log(Object.values(likes));
     if (Object.values(likes).includes(true)) {
       setFavPhoto(true);
     } else {
