@@ -14,18 +14,19 @@ const App = () => {
     return setPhoto(currentPhoto);
   }
 
-  // Top nav bar like notification tracker
-  const [favPhoto, setFavPhoto] = useState(false);
-  const notifHandler = () => setFavPhoto(!favPhoto);
-
+  // Create likes object to track notifications
+  const likes = {};
+  
   // Create like useStates for each picture
   for (const key in photos) {
     const [like, setLike] = useState(false);
-    const likeHandler = () => {
-      notifHandler();
-      return setLike(!like);
+    const likeHandler = (id) => {
+      notifHandler(id, !like);
+      setLike(!like);
     }
-   photos[key].likedByKey = { like, likeHandler };
+
+  // Set like useState to associated photo
+  photos[key].likedByKey = { like, likeHandler };
 
     // Set same useStates for similar photos
     for (const key2 in photos) {
@@ -36,6 +37,19 @@ const App = () => {
           photos[key2].similar_photos[`photo${photo.id}`].likedByKey = { like, likeHandler };
         }
       }
+    }
+  }
+
+  const [favPhoto, setFavPhoto] = useState(false);
+  const notifHandler = (id, like) => {
+    console.log(like);
+    likes[id] = like;
+    console.log(likes);
+    console.log(Object.values(likes));
+    if (Object.values(likes).includes(true)) {
+      setFavPhoto(true);
+    } else {
+      setFavPhoto(false);
     }
   }
 
