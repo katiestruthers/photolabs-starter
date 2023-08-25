@@ -5,14 +5,11 @@ import topics from './mocks/topics';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import objectToArray from "helpers/objectToArray";
+import useApplicationData from 'hooks/useApplicationData';
 
 
 const App = () => {
-  // Photo details modal state
-  const [photo, setPhoto] = useState(null);
-  const photoHandling = (currentPhoto) => {
-    return setPhoto(currentPhoto);
-  }
+  const { state, setPhotoSelected, onClosePhotoDetailsModal } = useApplicationData();
 
   // Create likes object to track notifications
   const likes = {};
@@ -52,16 +49,21 @@ const App = () => {
   }
 
   const homeData = {
-    photos: { ...photos },
+    photos: { ...state.photos },
     topics: { ...topics },
-    photoHandling,
+    setPhotoSelected,
     favPhotoExists: favPhoto
+  }
+
+  const photoDetailsModalData ={
+    photo: { ...state.photo },
+    onClosePhotoDetailsModal
   }
 
   return (
     <div className="App">
       <HomeRoute {...homeData}/>
-      {photo && <PhotoDetailsModal {...photo}/>}
+      {state.photo && <PhotoDetailsModal {...photoDetailsModalData}/>}
     </div>
   );
 };

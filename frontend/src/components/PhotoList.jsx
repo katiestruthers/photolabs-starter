@@ -11,7 +11,7 @@ const PhotoList = (props) => {
         <PhotoListItem
           key={photo.id} 
           photo={photo}
-          photoHandling={props.photoHandling}
+          setPhotoSelected={props.setPhotoSelected}
         />
       </li>
     )
