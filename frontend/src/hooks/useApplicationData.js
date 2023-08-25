@@ -5,40 +5,26 @@ import objectToArray from "helpers/objectToArray";
 const useApplicationData = () => {
     // Photo details modal state
   const [photo, setPhoto] = useState(null);
-  const photoHandling = (currentPhoto) => setPhoto(currentPhoto);
+  const photoHandler = (currentPhoto) => setPhoto(currentPhoto);
 
-  // Create likes object to track notifications
-  const likes = {};
-  
-  // Create like useStates for each picture
-  const updateToFavPhotosIds = () => {
-    for (const key in photos) {
-      const [like, setLike] = useState(false);
-      const likeHandler = (id) => {
-        notifHandler(id, !like);
-        setLike(!like);
-      }
-      likes[key] = like;
-  
-    // Set like useState to associated photo
-    photos[key].likedByKey = { like, likeHandler };
-  
-      // Set same useStates for similar photos
-      for (const key2 in photos) {
-        const similarPhotosArray = objectToArray(photos[key2].similar_photos);
-  
-        for (const photo of similarPhotosArray) {
-          if (Number(photo.id) === Number(key) + 1) {
-            photos[key2].similar_photos[`photo${photo.id}`].likedByKey = { like, likeHandler };
-          }
-        }
-      }
-    }
+  // Create default likes object
+  const likesObj = {};
+  for (const key in photos) {
+    likesObj[key] = false;
   }
 
+  // Track like useStates for each picture in object
+  const [likes, setLikes] = useState(likesObj);
+  const updateToFavPhotosIds = (id) => {
+    likes[id] = !likes[id];
+    const newLikes = {...likes};
+    setLikes(newLikes);
+    notifHandler();
+  }
+
+  // Track if there is a currently favourited photo
   const [favPhoto, setFavPhoto] = useState(false);
-  const notifHandler = (id, like) => {
-    likes[id] = like;
+  const notifHandler = () => {
     if (Object.values(likes).includes(true)) {
       setFavPhoto(true);
     } else {
@@ -48,8 +34,8 @@ const useApplicationData = () => {
 
   // Return keys
   const state = { photo: photo, photos: photos, likes: likes, favPhoto: favPhoto };
-  const setPhotoSelected = (currentPhoto) => photoHandling(currentPhoto);
-  const onClosePhotoDetailsModal = () => photoHandling(null);
+  const setPhotoSelected = (currentPhoto) => photoHandler(currentPhoto);
+  const onClosePhotoDetailsModal = () => photoHandler(null);
 
   return ({ 
     state, 

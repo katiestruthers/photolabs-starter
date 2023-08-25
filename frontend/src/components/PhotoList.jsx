@@ -12,6 +12,8 @@ const PhotoList = (props) => {
           key={photo.id} 
           photo={photo}
           setPhotoSelected={props.setPhotoSelected}
+          updateToFavPhotosIds={props.updateToFavPhotosIds}
+          likes={props.likes}
         />
       </li>
     )
