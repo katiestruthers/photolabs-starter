@@ -1,6 +1,4 @@
-import { useReducer } from 'react';
-import photos from '../mocks/photos';
-import topics from '../mocks/topics';
+import { useReducer, useEffect } from 'react';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -11,13 +9,26 @@ function reducer(state, action) {
       } else {
         state.favPhoto = false;
       }
-      const newStateFavPhoto = { ...state };
-      return newStateFavPhoto;
+      return { ...state };
 
     case 'DISPLAY_PHOTO_DETAILS':
       state.photo = action.currentPhoto;
-      const newStateDisplayPhoto = { ...state };
-      return newStateDisplayPhoto;
+      return { ...state };
+
+    case 'SET_PHOTO_DATA':
+      state.photos = action.payload;
+
+      // Create default likes object
+      const likesObj = {};
+      for (const key in state.photos) {
+        likesObj[key] = false;
+      }
+      state.likes = likesObj;
+      return { ...state };
+
+    case 'SET_TOPIC_DATA':
+      state.topics = action.payload;
+      return { ...state };
 
     default:
       return state;
@@ -28,18 +39,28 @@ const useApplicationData = () => {
   // Default actions for reducer
   const ACTIONS = {
     UPDATE_FAV_PHOTO: 'UPDATE_FAV_PHOTO',
-    DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
-  }
-
-  // Create default likes object
-  const likesObj = {};
-  for (const key in photos) {
-    likesObj[key] = false;
+    DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
+    SET_PHOTO_DATA: 'SET_PHOTO_DATA',
+    SET_TOPIC_DATA: 'SET_TOPIC_DATA'
   }
 
   // Create useReducer
-  const initialState = { photos, topics, likes: likesObj, photo: null, favPhoto: false };
+  const initialState = { photos: [], topics: [], likes: {}, photo: null, favPhoto: false };
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // Fetch photo data
+  useEffect(() => {
+    fetch('http://localhost:8001/api/photos')
+      .then(res => res.json())
+      .then(photoData => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData }));
+   }, []);
+
+  // Fetch topic data
+  useEffect(() => {
+    fetch('http://localhost:8001/api/topics')
+      .then(res => res.json())
+      .then(topicData => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicData }));
+   }, []);
 
   return ({ state, dispatch, ACTIONS });
 }
