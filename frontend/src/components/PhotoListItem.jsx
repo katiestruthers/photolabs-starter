@@ -7,11 +7,15 @@ const PhotoListItem = (props) => {
   const { city, country } = props.photo.location;
   const { regular } = props.photo.urls;
   const { name, profile } = props.photo.user;
+  const photoListOnClick = (currentPhoto) => {
+    console.log('in dispatch!', currentPhoto);
+    props.dispatch({ type: props.ACTIONS.DISPLAY_PHOTO_DETAILS, currentPhoto })
+  }
 
   return (
     <div className="photo-list__item">
       <PhotoFavButton {...props} key={id}/>
-      <img src={regular} className="photo-list__image" onClick={() => props.setPhotoSelected(props.photo)}/>
+      <img src={regular} className="photo-list__image" onClick={() => photoListOnClick(props.photo)}/>
       <div className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile"/>
         <div className="photo-list__user-info">

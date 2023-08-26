@@ -1,10 +1,35 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 import photos from '../mocks/photos';
+import topics from '../mocks/topics';
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'UPDATE_FAV_PHOTO':
+      state.likes[action.id] = !state.likes[action.id];
+      if (Object.values(state.likes).includes(true)) {
+        state.favPhoto = true;
+      } else {
+        state.favPhoto = false;
+      }
+      const newStateFavPhoto = { ...state };
+      return newStateFavPhoto;
+
+    case 'DISPLAY_PHOTO_DETAILS':
+      state.photo = action.currentPhoto;
+      const newStateDisplayPhoto = { ...state };
+      return newStateDisplayPhoto;
+
+    default:
+      return state;
+  }
+}
 
 const useApplicationData = () => {
-    // Photo details modal state
-  const [photo, setPhoto] = useState(null);
-  const photoHandler = (currentPhoto) => setPhoto(currentPhoto);
+  // Default actions for reducer
+  const ACTIONS = {
+    UPDATE_FAV_PHOTO: 'UPDATE_FAV_PHOTO',
+    DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
+  }
 
   // Create default likes object
   const likesObj = {};
@@ -12,36 +37,11 @@ const useApplicationData = () => {
     likesObj[key] = false;
   }
 
-  // Track like useStates for each picture in object
-  const [likes, setLikes] = useState(likesObj);
-  const updateToFavPhotosIds = (id) => {
-    likes[id] = !likes[id];
-    const newLikes = {...likes};
-    setLikes(newLikes);
-    notifHandler();
-  }
+  // Create useReducer
+  const initialState = { photos, topics, likes: likesObj, photo: null, favPhoto: false };
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Track if there is a currently favourited photo
-  const [favPhoto, setFavPhoto] = useState(false);
-  const notifHandler = () => {
-    if (Object.values(likes).includes(true)) {
-      setFavPhoto(true);
-    } else {
-      setFavPhoto(false);
-    }
-  }
-
-  // Return keys
-  const state = { photo: photo, photos: photos, likes: likes, favPhoto: favPhoto };
-  const setPhotoSelected = (currentPhoto) => photoHandler(currentPhoto);
-  const onClosePhotoDetailsModal = () => photoHandler(null);
-
-  return ({ 
-    state, 
-    updateToFavPhotosIds, 
-    setPhotoSelected, 
-    onClosePhotoDetailsModal
-  });
+  return ({ state, dispatch, ACTIONS });
 }
 
 export default useApplicationData;

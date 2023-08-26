@@ -6,14 +6,16 @@ import TopNavigationBar from '../components/TopNavigationBar';
 const HomeRoute = (props) => {
   const photoData = {
     photos: {...props.photos}, 
-    setPhotoSelected: props.setPhotoSelected,
-    updateToFavPhotosIds: props.updateToFavPhotosIds,
-    likes: props.likes
+    likes: props.likes,
+    dispatch: props.dispatch,
+    ACTIONS: props.ACTIONS
   };
 
   const navData = {
     topics: {...props.topics}, 
-    favPhotoExists: props.favPhotoExists
+    favPhotoExists: props.favPhotoExists,
+    dispatch: props.dispatch,
+    ACTIONS: props.ACTIONS
   };
 
   return (

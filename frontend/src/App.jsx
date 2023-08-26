@@ -1,30 +1,26 @@
 import React, { useState } from 'react';
 import './App.scss';
-import topics from './mocks/topics';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import useApplicationData from 'hooks/useApplicationData';
 
 const App = () => {
-  const { 
-    state, 
-    setPhotoSelected, 
-    onClosePhotoDetailsModal, 
-    updateToFavPhotosIds 
-  } = useApplicationData();
+  const { state, dispatch, ACTIONS } = useApplicationData();
 
   const homeData = {
     photos: { ...state.photos },
-    topics: { ...topics },
-    setPhotoSelected,
-    updateToFavPhotosIds,
+    topics: { ...state.topics },
     likes: state.likes,
-    favPhotoExists: state.favPhoto
+    favPhotoExists: state.favPhoto,
+    dispatch,
+    ACTIONS
   }
 
   const photoDetailsModalData ={
     photo: { ...state.photo },
-    onClosePhotoDetailsModal
+    likes: state.likes,
+    dispatch,
+    ACTIONS
   }
 
   return (
