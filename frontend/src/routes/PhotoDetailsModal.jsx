@@ -6,8 +6,9 @@ import PhotoList from 'components/PhotoList';
 const PhotoDetailsModal = (props) => {
   const { regular } = props.photo.urls;
   const closeOnClick = () => {
-    return props.dispatch({ type: props.ACTIONS.DISPLAY_PHOTO_DETAILS, photo: null });
+    return props.dispatch({ type: props.ACTIONS.DISPLAY_PHOTO_DETAILS, currentPhoto: null });
   };
+  
   const photoData = { 
     photos: {...props.photo.similar_photos}, 
     likes: props.likes,

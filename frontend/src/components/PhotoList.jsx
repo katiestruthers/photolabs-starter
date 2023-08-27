@@ -17,7 +17,7 @@ const PhotoList = (props) => {
         />
       </li>
     )
-  })
+  });
 
   return (
     <ul className="photo-list">

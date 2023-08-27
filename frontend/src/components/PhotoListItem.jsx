@@ -9,7 +9,7 @@ const PhotoListItem = (props) => {
   const { name, profile } = props.photo.user;
   const photoListOnClick = (currentPhoto) => {
     props.dispatch({ type: props.ACTIONS.DISPLAY_PHOTO_DETAILS, currentPhoto })
-  }
+  };
 
   return (
     <div className="photo-list__item">
