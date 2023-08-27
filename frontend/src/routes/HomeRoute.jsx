@@ -13,6 +13,7 @@ const HomeRoute = (props) => {
 
   const navData = {
     topics: {...props.topics}, 
+    topic: props.topic,
     favPhotoExists: props.favPhotoExists,
     dispatch: props.dispatch,
     ACTIONS: props.ACTIONS

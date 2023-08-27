@@ -8,7 +8,6 @@ const PhotoListItem = (props) => {
   const { regular } = props.photo.urls;
   const { name, profile } = props.photo.user;
   const photoListOnClick = (currentPhoto) => {
-    console.log('in dispatch!', currentPhoto);
     props.dispatch({ type: props.ACTIONS.DISPLAY_PHOTO_DETAILS, currentPhoto })
   }
 

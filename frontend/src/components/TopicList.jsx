@@ -11,8 +11,12 @@ const TopicList = (props) => {
       <span key={topic.id}>
         <TopicListItem
           key={topic.id}
+          id={topic.id}
           title={topic.title}
-          slug={topic.slug} 
+          slug={topic.slug}
+          topic={props.topic} 
+          dispatch={props.dispatch}
+          ACTIONS={props.ACTIONS}
         />
       </span>
     )

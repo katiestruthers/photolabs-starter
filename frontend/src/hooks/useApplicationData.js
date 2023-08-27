@@ -30,6 +30,14 @@ function reducer(state, action) {
       state.topics = action.payload;
       return { ...state };
 
+    case 'SET_NAV_TOPIC':
+      state.topic = action.topic;
+      return { ...state };
+
+    case 'GET_PHOTOS_BY_TOPICS':
+      state.photos = action.payload;
+      return { ...state };
+
     default:
       return state;
   }
@@ -41,19 +49,21 @@ const useApplicationData = () => {
     UPDATE_FAV_PHOTO: 'UPDATE_FAV_PHOTO',
     DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
     SET_PHOTO_DATA: 'SET_PHOTO_DATA',
-    SET_TOPIC_DATA: 'SET_TOPIC_DATA'
+    SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+    SET_NAV_TOPIC: 'SET_NAV_TOPIC',
+    GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
   }
 
   // Create useReducer
-  const initialState = { photos: [], topics: [], likes: {}, photo: null, favPhoto: false };
+  const initialState = { 
+    photos: [], 
+    topics: [], 
+    likes: {}, 
+    photo: null,
+    topic: null,
+    favPhoto: false 
+  };
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  // Fetch photo data
-  useEffect(() => {
-    fetch('http://localhost:8001/api/photos')
-      .then(res => res.json())
-      .then(photoData => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData }));
-   }, []);
 
   // Fetch topic data
   useEffect(() => {
@@ -61,6 +71,22 @@ const useApplicationData = () => {
       .then(res => res.json())
       .then(topicData => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicData }));
    }, []);
+
+  // Fetch photo data
+  useEffect(() => {
+    // Get photos by topic
+    if (state.topic) {
+      fetch(`http://localhost:8001/api/topics/photos/${state.topic}`)
+        .then(res => res.json())
+        .then(photoData => dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: photoData })); 
+        
+    // Get all photos
+    } else {
+      fetch('http://localhost:8001/api/photos')
+        .then(res => res.json())
+        .then(photoData => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData }));
+    }
+   }, [state.topic]);
 
   return ({ state, dispatch, ACTIONS });
 }

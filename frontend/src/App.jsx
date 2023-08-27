@@ -12,6 +12,7 @@ const App = () => {
     topics: { ...state.topics },
     likes: state.likes,
     favPhotoExists: state.favPhoto,
+    topic: state.topic,
     dispatch,
     ACTIONS
   }

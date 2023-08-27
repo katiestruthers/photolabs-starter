@@ -4,7 +4,6 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from 'components/PhotoList';
 
 const PhotoDetailsModal = (props) => {
-  console.log('photo details modal props: ', props);
   const { regular } = props.photo.urls;
   const closeOnClick = () => {
     return props.dispatch({ type: props.ACTIONS.DISPLAY_PHOTO_DETAILS, photo: null });
@@ -15,7 +14,6 @@ const PhotoDetailsModal = (props) => {
     dispatch: props.dispatch,
     ACTIONS: props.ACTIONS
   };
-  console.log('photo details photo data: ', photoData);
 
   return (
     <div className="photo-details-modal">
