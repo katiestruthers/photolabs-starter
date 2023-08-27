@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from 'components/PhotoList';
+import PhotoFavButton from 'components/PhotoFavButton';
 
 const PhotoDetailsModal = (props) => {
   const { regular } = props.photo.urls;
@@ -22,6 +23,7 @@ const PhotoDetailsModal = (props) => {
         <img src={closeSymbol} alt="close symbol" onClick={closeOnClick}/>
       </button>
       <section className="photo-details-modal__images">
+        <PhotoFavButton {...props} key={props.photo.id} />
         <img src={regular} className="photo-details-modal__image" />
         <header className="photo-details-modal__header">Similar Photos</header>
         <PhotoList {...photoData} />
